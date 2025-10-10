@@ -1,0 +1,116 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f8f8f8; /* Light background for the entire page */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.chat-container {
+    width: 350px;
+    height: 500px;
+    border-radius: 15px;
+    background-color: #fff;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+    transition: all 0.3s ease;
+}
+
+.chat-header {
+    background-color: #ff66b2; /* Bright pink header */
+    color: white;
+    text-align: center;
+    padding: 12px;
+    border-radius: 10px;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.chat-window {
+    padding: 15px;
+    overflow-y: auto;
+    flex: 1;
+    height: 300px;
+    background-color: #ffe6f7; /* Light pink background for chat window */
+    border-radius: 10px;
+    margin-bottom: 15px;
+    box-shadow: inset 0 2px 15px rgba(0, 0, 0, 0.1);
+    font-size: 16px;
+    font-family: 'Verdana', sans-serif;
+}
+
+#user-input {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #ff66b2;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    font-size: 16px;
+    outline: none;
+    color: #333;
+    transition: border-color 0.3s ease;
+}
+
+#user-input:focus {
+    border-color: #ff3385; /* Darker pink when focused */
+}
+
+#send-btn {
+    background-color: #ff66b2;
+    color: #fff;
+    border: none;
+    padding: 12px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    font-weight: bold;
+}
+
+#send-btn:hover {
+    background-color: #ff3385; /* Darker pink on hover */
+}
+
+.suggestions {
+    padding: 10px;
+    background-color: #ffe6f7;
+    border: 2px solid #ff66b2;
+    border-radius: 10px;
+    display: none;
+    margin-top: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.suggestion-item {
+    margin: 8px 0;
+    padding: 5px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.suggestion-item:hover {
+    background-color: #ffebf2;
+}
+
+p {
+    margin: 8px 0;
+}
+
+strong {
+    color: #ff66b2; /* Highlight user's and chatbot's names with pink */
+}
+
+/* Animations */
+@keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+.chat-window p {
+    animation: fadeIn 0.5s ease-in-out;
+}

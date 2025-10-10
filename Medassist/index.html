@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MedAssist - Your Health Navigator</title>
+    <link rel="stylesheet" href="medassist.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        
+        body {
+            background-color: #d9ebf5;
+            color:black;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #2582e6;
+            padding: 20px;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            color: #f21414;
+        }
+
+        nav {
+            margin-top: 20px;
+        }
+
+        button {
+            background-color: #5ec1e9;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            margin: 10px;
+            font-size: 1.2em;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #0571a3;
+        }
+
+        section {
+            margin-top: 20px;
+        } 
+
+       
+        .chatbot-icon {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            background-color: #ff1a75;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 30px;
+            cursor: pointer;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s ease;
+        }
+
+        .chatbot-icon:hover {
+            background-color: #1e96c5;
+        }
+
+        /* Chatbot modal styling */
+        .chat-container {
+            width: 350px;
+            height: 500px;
+            border-radius: 15px;
+            background-color: #fff;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            padding: 15px;
+            transition: all 0.3s ease;
+            position: fixed;
+            bottom: 100px;
+            right: 30px;
+            display: none;
+        }
+
+        .chat-header {
+            background-color: #4bb1e0;
+            color: white;
+            text-align: center;
+            padding: 12px;
+            border-radius: 10px;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .chat-window {
+            padding: 15px;
+            overflow-y: auto;
+            flex: 1;
+            height: 250px;
+            background-color: #ffe6f7;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            box-shadow: inset 0 2px 15px rgba(0, 0, 0, 0.1);
+            font-size: 16px;
+            font-family: 'Verdana', sans-serif;
+        }
+
+        #user-input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ff66b2;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            font-size: 16px;
+            outline: none;
+            color: #333;
+        }
+
+        #send-btn {
+            background-color: #ff66b2;
+            color: #fff;
+            border: none;
+            padding: 12px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .suggestions {
+            padding: 10px;
+            background-color: #ffe6f7;
+            border: 2px solid #ff66b2;
+            border-radius: 10px;
+            display: none;
+            margin-top: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .suggestion-item {
+            margin: 8px 0;
+            padding: 5px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .suggestion-item:hover {
+            background-color: #ffebf2;
+        }
+        .chat{
+            border: red;
+    background-color: #FFFFFF;
+    height: 60px;
+    -moz-border-radius:75px;
+    -webkit-border-radius: 75px;
+    width: 60px
+        }
+    </style> 
+</head>
+<body>
+
+
+
+
+    <!-- Chatbot icon button -->
+    <div class="chatbot-icon" onclick="toggleChatbot()">
+        💬
+    </div>
+
+    <!-- Chatbot Modal -->
+    <div class="chat-container" id="chatbot-modal">
+        <div class="chat-header">MedAssist Chatbot</div>
+        <div class="chat-window" id="chat-window"></div>
+        <input type="text" id="user-input" placeholder="Type a message..." oninput="showSuggestions()">
+        <button id="send-btn">Send</button>
+        <div class="suggestions" id="suggestions"></div>
+    </div>
+
+    <header>
+        <nav>
+            <img src="logo.jpeg" width="50px" alt="">
+            <div class="logo" >MedAssist</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#departments">Departments</a></li>
+                <li><a href="#research">Research</a></li>
+               
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="search-bar">
+                <input type="text" id="searchInput" placeholder="Search...">
+                <button id="searchBtn"><i class="fas fa-search"></i></button>
+            </div>
+            <button id="findDoctorBtn">Find a Doctor</button>
+            <div class="menu-toggle" id="mobile-menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1></h1>
+            <p>Providing world-class healthcare service</p>
+            <button id="learnMoreBtn">Learn More</button>
+        </div>
+    </section>
+
+    <!-- Departments Section -->
+    <section id="departments" class="departments">
+        <h2>Our Services</h2>
+        <div class="department-grid">
+            <div class="department-card">
+                <img src="https://i.pinimg.com/736x/df/1d/e3/df1de35a1960c30bba8f39a090ac8487.jpg" alt="Ambulance locator">
+                <h3>Ambulance Locator</h3>
+                <p>Find the nearest hospitals instantly for quick medical assistance
+                </p>
+                <button onclick="openWindow('index (2).html')">Ambulance Locator</button>
+               
+              
+            </div>
+            <div class="department-card">
+                <img src="https://i.pinimg.com/736x/d7/22/35/d72235c87cfe02dfcdc92c89d46096c0.jpg" alt="Hospital Locator">
+                <h3>Hospital Locator</h3>
+                <p>Find the nearest hospitals instantly for quick medical assistance</p>
+                <button onclick="openWindow('index (3).html')">Search Nearby Hospitals</button>
+            </div>
+            <div class="department-card">
+                <img src="https://images.pexels.com/photos/38271/ipad-map-tablet-internet-38271.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Real-Time Navigation">
+                <h3>Real-Time Navigation</h3>
+                <p>Get the fastest route to medical help with live traffic update</p>
+                <button onclick="openWindow('RTN.html')">Get Directions</button>
+            </div>
+        </div>
+    </section>
+ 
+    <!-- News & Research Section -->
+    <section id="research" class="research">
+        <h2>News & Research</h2>
+        <div class="research-list">
+            <div class="research-item">
+                <h3>Breakthrough in Cancer Treatment</h3>
+                <p>Published on: January 15, 2024</p>
+                <button class="readMoreBtn">Read More</button>
+            </div>
+            <div class="research-item">
+                <h3>New Advances in Robotic Surgery</h3>
+                <p>Published on: December 20, 2023</p>
+                <button class="readMoreBtn">Read More</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="footer-content">
+            <div class="contact-info">
+                <h3>Contact Us</h3>
+                <p>Email: info@hopkinsmedicine.com</p>
+                <p>Phone: +1 123-456-7890</p>
+            </div>
+            <div class="social-media">
+                <h3>Follow Us</h3>
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Hopkins Medicine. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Chatbot -->
+    <div class="chatbot-icon" id="chatbotIcon">
+        <img class="chat" src="data:image/png;base64,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" alt="Chatbot" >
+    </div>
+    <div class="chatbot-popup" id="chatbotPopup">
+        <div class="chatbot-header">
+            <h4>FAQs</h4>
+            <button id="closeChatbotBtn">&times;</button>
+        </div>
+        <div class="chatbot-body">
+            <p>How can I book an appointment?</p>
+            <p>What are your visiting hours?</p>
+        </div>
+    </div>
+        <!-- Chatbot icon button -->
+        <div class="chatbot-icon" onclick="toggleChatbot()">
+            <div class="chatbot-icon" id="chatbotIcon">
+                <img class="chat" src="data:image/png;base64,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" alt="Chatbot" >
+            </div>
+        </div>
+    
+        <!-- Chatbot Modal -->
+        <div class="chat-container" id="chatbot-modal">
+            <div class="chat-header">MedAssist Chatbot</div>
+            <div class="chat-window" id="chat-window"></div>
+            <input type="text" id="user-input" placeholder="Type a message..." oninput="showSuggestions()">
+            <button id="send-btn">Send</button>
+            <div class="suggestions" id="suggestions"></div>
+        </div>
+
+    <!-- JavaScript Integration from chatboot.js with suggestions functionality -->
+    <script>
+        const firstAidDatabase = {
+            "heart attack": "Call ambulance immediately. Keep patient calm and comfortable.",
+            "head injury": "Apply ice pack. Monitor for concussion symptoms.",
+            "burns": "Run cool water over burn. Cover with non-stick dressing.",
+            "fracture": "Immobilize the injured area. Apply ice and seek medical attention.",
+            "bleeding": "Apply pressure on the wound. Elevate the injured limb.",
+            "dizziness": "Sit or lie down. Drink water and rest.",
+            "choking": "Perform the Heimlich maneuver. Call for help immediately.",
+            "allergic reaction": "Use antihistamines if available. Seek medical help if symptoms worsen.",
+            "hypothermia": "Warm the person slowly. Provide blankets and warm drinks.",
+            "heatstroke": "Move to a cooler place. Hydrate and cool the body with ice packs.",
+            "severe headache": "Rest in a dark room. Take over-the-counter painkillers if needed.",
+            "nosebleed": "Pinch the nostrils and lean forward. Avoid tilting the head back.",
+            "diabetic emergency": "Give sugar or glucose if the person is conscious. Call for help.",
+            "asthma attack": "Use inhaler. Sit upright and breathe slowly.",
+            "severe abdominal pain": "Rest. Seek medical attention if pain persists or worsens.",
+            "seizure": "Clear the area around the person. Do not hold them down. Call for help.",
+            "poisoning": "Call poison control immediately. If the substance is ingested, do not induce vomiting.",
+            "stroke": "Recognize the signs: facial drooping, arm weakness, and speech difficulty. Call for help.",
+            "animal bite": "Clean the wound and apply pressure to stop bleeding. Seek medical help.",
+            "eye injury": "Rinse with clean water. Cover with a sterile dressing and seek medical help."
+        };
+
+        function toggleChatbot() {
+            const chatbotModal = document.getElementById("chatbot-modal");
+            chatbotModal.style.display = chatbotModal.style.display === "none" ? "flex" : "none";
+        }
+
+        document.getElementById("send-btn").addEventListener("click", () => {
+            const userInput = document.getElementById("user-input").value.trim();
+            const response = getResponse(userInput);
+            document.getElementById("chat-window").innerHTML += `<p><strong>You:</strong> ${userInput}</p>`;
+            document.getElementById("chat-window").innerHTML += `<p><strong>MedAssist:</strong> ${response}</p>`;
+            document.getElementById("user-input").value = "";
+            document.getElementById("chat-window").scrollTop = document.getElementById("chat-window").scrollHeight;
+            document.getElementById("suggestions").style.display = "none";
+        });
+
+        function showSuggestions() {
+            const userInput = document.getElementById("user-input").value.trim().toLowerCase();
+            const suggestionsBox = document.getElementById("suggestions");
+            suggestionsBox.innerHTML = '';
+
+            if (userInput.length > 0) {
+                let suggestions = [];
+                for (const condition in firstAidDatabase) {
+                    if (condition.includes(userInput)) {
+                        suggestions.push(condition);
+                    }
+                }
+                if (suggestions.length > 0) {
+                    suggestions.forEach(suggestion => {
+                        const suggestionElement = document.createElement("div");
+                        suggestionElement.classList.add("suggestion-item");
+                        suggestionElement.innerText = suggestion;
+                        suggestionElement.onclick = () => {
+                            document.getElementById("user-input").value = suggestion;
+                            suggestionsBox.style.display = 'none';
+                        };
+                        suggestionsBox.appendChild(suggestionElement);
+                    });
+                    suggestionsBox.style.display = 'block';
+                } else {
+                    suggestionsBox.style.display = 'none';
+                }
+            } else {
+                suggestionsBox.style.display = 'none';
+            }
+        }
+
+        function getResponse(userInput) {
+            userInput = userInput.toLowerCase();
+            for (const condition in firstAidDatabase) {
+                if (userInput.includes(condition)) {
+                    return firstAidDatabase[condition];
+                }
+            }
+            return "Sorry, I'm not sure about that. Please provide more information.";
+        }
+
+        function openWindow(page) {
+            window.open(page, '_blank', 'width=1000,height=700');
+        }
+
+    </script>
+</body>
+</html>
