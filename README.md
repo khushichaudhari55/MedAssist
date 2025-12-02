@@ -53,10 +53,27 @@ Improve the chatbot AI for more accurate health-related responses. Enhance the U
 # License
 This project is open-source and available under the MIT License**give heading and format this text  for github readme
 
-<img width="1900" height="912" alt="Screenshot 2025-12-02 172333" src="https://github.com/user-attachments/assets/6ac7806e-9047-4970-b67a-4857255e6088" />
-<img width="1886" height="838" alt="Screenshot 2025-12-02 172351" src="https://github.com/user-attachments/assets/a79602d7-7172-404e-930e-f61d30b09594" />
-<img width="1244" height="864" alt="Screenshot 2025-12-02 172555" src="https://github.com/user-attachments/assets/4d2d4044-7112-4423-9db9-164b4a36b3a4" />
-<img width="1235" height="889" alt="Screenshot 2025-12-02 172519" src="https://github.com/user-attachments/assets/72aa55db-bc41-4a6d-b433-5c6bea3a76ea" />
-<img width="1895" height="916" alt="Screenshot 2025-12-02 172451" src="https://github.com/user-attachments/assets/4af87741-44d7-4ee4-a753-a02a927568e3" />
+<h2>Screenshots</h2>
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/6ac7806e-9047-4970-b67a-4857255e6088" width="800" />
+</p>
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/a79602d7-7172-404e-930e-f61d30b09594" width="800" />
+</p>
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/4d2d4044-7112-4423-9db9-164b4a36b3a4" width="800" />
+</p>
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/72aa55db-bc41-4a6d-b433-5c6bea3a76ea" width="800" />
+</p>
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/4af87741-44d7-4ee4-a753-a02a927568e3" width="800" />
+</p>
+
 
 
