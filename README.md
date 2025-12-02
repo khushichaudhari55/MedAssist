@@ -68,11 +68,12 @@ This project is open-source and available under the MIT License**give heading an
 </p>
 
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/72aa55db-bc41-4a6d-b433-5c6bea3a76ea" width="800" />
+  <img src="https://github.com/user-attachments/assets/d10ef2d3-1e83-4cb3-8411-b47394e51862" width="800" />
 </p>
 
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/4af87741-44d7-4ee4-a753-a02a927568e3" width="800" />
+  <img src="https://github.com/user-attachments/assets/bfd1dbb0-197b-450d-8abe-81ba5dcefd97" width="800" />
+
 </p>
 
 
